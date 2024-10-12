@@ -501,13 +501,11 @@ function diffElementNodes(
 		} else if (typeof newChildren === 'string') {
 			if (newChildren !== oldProps.children) {
 				// Unmount any previous children
-				if (oldVNode._children) {
-					while ((i = oldVNode._children.pop())) {
-						// Setting textContent on the dom element will unmount all DOM nodes
-						// of the previous children, so we don't need to remove DOM in this
-						// call to unmount
-						unmount(i, oldVNode, true);
-					}
+				while (oldVNode._children && (i = oldVNode._children.pop())) {
+					// Setting textContent on the dom element will unmount all DOM nodes
+					// of the previous children, so we don't need to remove DOM in this
+					// call to unmount
+					unmount(i, oldVNode, true);
 				}
 
 				// @ts-expect-error
