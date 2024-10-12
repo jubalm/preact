@@ -513,8 +513,6 @@ function diffElementNodes(
 			}
 		} else {
 			if (oldHtml) dom.innerHTML = '';
-			// Previous render was a single text child. New children are not so let's
-			// unmount the previous text child
 			if (typeof oldProps.children === 'string') {
 				dom.removeChild(dom.firstChild);
 			}

@@ -35,7 +35,7 @@
 				const elementSelector = 'tr:first-child > td:first-child';
 
 				// MUST BE KEPT IN SYNC WITH WARMUP COUNT IN benches/scripts/config.js
-				const WARMUP_COUNT = 25;
+				const WARMUP_COUNT = 5;
 				for (let i = 0; i < WARMUP_COUNT; i++) {
 					markRunStart(`warmup-${i}`);
 					run();
