@@ -289,6 +289,7 @@ export function diff(
 			options._catchError(e, newVNode, oldVNode);
 		}
 	} else if (
+		// test
 		excessDomChildren == null &&
 		newVNode._original === oldVNode._original
 	) {
