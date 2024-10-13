@@ -500,7 +500,6 @@ function diffElementNodes(
 			newVNode._children = [];
 		} else if (typeof newChildren === 'string') {
 			if (newChildren !== oldProps.children) {
-				// Unmount any previous children
 				while (oldVNode._children && (i = oldVNode._children.pop())) {
 					// Setting textContent on the dom element will unmount all DOM nodes
 					// of the previous children, so we don't need to remove DOM in this
@@ -508,12 +507,12 @@ function diffElementNodes(
 					unmount(i, oldVNode, true);
 				}
 
+				newVNode._children = [
+					// @ts-expect-error
+					createVNode(null, (dom.textContent = newChildren), null, null)
+				];
 				// @ts-expect-error
-				dom.textContent = newChildren;
-				const vnode = createVNode(null, newChildren, null, null);
-				newVNode._children = [vnode];
-				// @ts-expect-error
-				vnode._dom = dom.firstChild;
+				newVNode._children[0]._dom = dom.firstChild;
 			}
 		} else {
 			if (oldHtml) dom.innerHTML = '';
