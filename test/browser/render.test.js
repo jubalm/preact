@@ -1662,12 +1662,9 @@ describe('render()', () => {
 			`<div>${b.map(n => `<div>${n}</div>`).join('')}</div>`
 		);
 		expect(getLog()).to.deep.equal([
-			'<div>0123456.insertBefore(<div>1, <div>0)',
-			'<div>1023456.insertBefore(<div>3, <div>0)',
-			'<div>1302456.insertBefore(<div>5, <div>0)',
-			'<div>1350246.insertBefore(<div>2, <div>0)',
-			'<div>1352046.insertBefore(<div>6, <div>0)',
-			'<div>1352604.insertBefore(<div>4, <div>0)'
+			'<div>0123456.insertBefore(<div>2, <div>6)',
+			'<div>0134526.appendChild(<div>4)',
+			'<div>0135264.appendChild(<div>0)'
 		]);
 		clearLog();
 

@@ -5,7 +5,7 @@ import {
 	RESET_MODE
 } from '../constants';
 import { BaseComponent, getDomSibling } from '../component';
-import { Fragment } from '../create-element';
+import { Fragment, createVNode } from '../create-element';
 import { diffChildren } from './children';
 import { setProperty } from './props';
 import { assign, isArray, removeNode, slice } from '../util';
@@ -510,12 +510,13 @@ function diffElementNodes(
 
 				// @ts-expect-error
 				dom.textContent = newChildren;
+				const vnode = createVNode(null, newChildren, null, null);
+				newVNode._children = [vnode];
+				// @ts-expect-error
+				vnode._dom = dom.firstChild;
 			}
 		} else {
 			if (oldHtml) dom.innerHTML = '';
-			if (typeof oldProps.children === 'string') {
-				dom.removeChild(dom.firstChild);
-			}
 
 			diffChildren(
 				dom,

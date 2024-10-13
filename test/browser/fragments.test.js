@@ -774,9 +774,9 @@ describe('Fragment', () => {
 		expect(scratch.innerHTML).to.equal(htmlForFalse);
 		expectDomLogToBe(
 			[
-				'<div>fooHellobeep.insertBefore(<div>beep, <div>foo)',
-				'<div>beepbarHello.appendChild(<div>bar)',
-				'<div>beepHellobar.insertBefore(<div>Hello, <div>bar)'
+				'<div>barHellobeep.insertBefore(<div>bar, <div>beep)',
+				'<div>Hellobarbeep.appendChild(<div>Hello)',
+				'<div>barbeepHello.appendChild(<div>bar)'
 			],
 			'rendering true to false'
 		);
@@ -788,8 +788,8 @@ describe('Fragment', () => {
 		expect(scratch.innerHTML).to.equal(htmlForTrue);
 		expectDomLogToBe(
 			[
-				'<div>beepHellofoo.insertBefore(<div>foo, <div>beep)',
-				'<div>foobeepHello.insertBefore(<div>Hello, <div>beep)'
+				'<div>beepHellofoo.appendChild(<div>Hello)',
+				'<div>boopfooHello.appendChild(<div>boop)'
 			],
 			'rendering false to true'
 		);
@@ -1351,9 +1351,7 @@ describe('Fragment', () => {
 		);
 		expectDomLogToBe([
 			'<ol>012345.insertBefore(<li>4, <li>0)',
-			'<ol>401235.insertBefore(<li>5, <li>0)',
-			'<ol>450123.insertBefore(<li>4, <li>0)',
-			'<ol>540123.insertBefore(<li>5, <li>0)'
+			'<ol>401235.insertBefore(<li>5, <li>0)'
 		]);
 
 		clearLog();
@@ -1547,9 +1545,9 @@ describe('Fragment', () => {
 		expectDomLogToBe(
 			[
 				'<div>boop.remove()',
-				'<div>fooHellobeep.insertBefore(<div>beep, <div>foo)',
-				'<div>beepbarHello.appendChild(<div>bar)',
-				'<div>beepHellobar.insertBefore(<div>Hello, <div>bar)'
+				'<div>barHellobeep.insertBefore(<div>bar, <div>beep)',
+				'<div>Hellobarbeep.appendChild(<div>Hello)',
+				'<div>barbeepHello.appendChild(<div>bar)'
 			],
 			'rendering from true to false'
 		);
@@ -1564,8 +1562,8 @@ describe('Fragment', () => {
 		);
 		expectDomLogToBe(
 			[
-				'<div>beepHellofoo.insertBefore(<div>foo, <div>beep)',
-				'<div>foobeepHello.insertBefore(<div>Hello, <div>beep)',
+				'<div>beepHellofoo.appendChild(<div>Hello)',
+				'<div>boopfooHello.appendChild(<div>boop)',
 				'<div>fooHelloboop.appendChild(<div>boop)'
 			],
 			'rendering from false to true'
@@ -1632,11 +1630,9 @@ describe('Fragment', () => {
 		);
 		expectDomLogToBe(
 			[
-				'<div>fooHellobeepboopboop.insertBefore(<div>beep, <div>foo)',
-				'<div>beepfooHellobeepboop.insertBefore(<div>beep, <div>foo)',
-				'<div>beepbeepfooHellobeep.insertBefore(<div>beep, <div>foo)',
-				'<div>beepbeepbeepbarHello.appendChild(<div>bar)',
-				'<div>beepbeepbeepHellobar.insertBefore(<div>Hello, <div>bar)'
+				'<div>barHellobeepbeepbeep.insertBefore(<div>bar, <div>beep)',
+				'<div>Hellobarbeepbeepbeep.appendChild(<div>Hello)',
+				'<div>barbeepbeepbeepHello.appendChild(<div>bar)'
 			],
 			'rendering from true to false'
 		);
@@ -1651,10 +1647,9 @@ describe('Fragment', () => {
 		);
 		expectDomLogToBe(
 			[
-				'<div>beepbeepbeepHellofoo.insertBefore(<div>foo, <div>beep)',
-				'<div>foobeepbeepbeepHello.insertBefore(<div>Hello, <div>beep)',
-				'<div>fooHellobeepbeepbeep.insertBefore(<div>foo, <div>beep)',
-				'<div>Hellofoobeepbeepbeep.insertBefore(<div>Hello, <div>beep)'
+				'<div>beepbeepbeepHellofoo.appendChild(<div>Hello)',
+				'<div>beepbeepbeepfooHello.insertBefore(<div>foo, <div>beep)',
+				'<div>foobeepbeepbeepHello.insertBefore(<div>Hello, <div>beep)'
 			],
 			'rendering from false to true'
 		);
@@ -3061,10 +3056,6 @@ describe('Fragment', () => {
 		rerender();
 
 		expect(scratch.innerHTML).to.equal([div('A'), div(1), div(2)].join(''));
-		expectDomLogToBe([
-			'<div>B.remove()',
-			'<div>1A2.insertBefore(<div>A, <div>1)',
-			'<div>A11.insertBefore(<div>1, <div>1)'
-		]);
+		expectDomLogToBe(['<div>B.remove()', '<div>2A1.appendChild(<div>2)']);
 	});
 });
